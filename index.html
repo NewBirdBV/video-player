@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Video Demo</title>
+    <script type="text/javascript" src="lib/jquery-3.2.1.js"></script>
+    <style>
+        .wrap{
+            width:500px;
+            height:300px;
+            position: relative;
+            margin:0 auto;
+        }
+        video{
+            width:500px;
+            height:300px;
+            margin:0 auto;
+            display: block;
+        }
+        div.controls{
+            width:80px;
+            height:80px;
+            margin:0 auto;
+            border:1px solid aqua ;
+            border-radius:50%;
+            position: absolute;
+            opacity:.5;
+        }
+        .play{
+            left:44.5%;
+            top:35%;
+            background-size:90% 90% ;
+            background: url('img/play.png') no-repeat aqua 15px center ;
+            transition:all linear 300ms;
+        }
+        .play.controls:hover{
+            transform:scale(1.2);
+        }
+        .pause{
+            bottom:0;
+            right:0;
+            background-size:90% 90% ;
+            background: url('img/pause.png') no-repeat aqua 7px center ;
+            transition:all linear 300ms;
+            transform: scale(0.5);
+        }
+        .pause:hover{
+            transform:scale(0.7);
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <video class='videoWrap' src="src/Maroon%205%20-%20Sugar.mp4" controls="controls"></video>
+    <div class="controls play"></div>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var video=$('.videoWrap')[0];
+        $('.controls').on("click",function(){
+            if(video.paused){
+                video.play();
+                $(this).removeClass('play').addClass('pause');
+            }else if(video.played){
+                video.pause();
+                console.log(video.played);
+                $(this).removeClass('pause').addClass('play');
+            }
+        });
+        video.ontimeupdate=function(){
+            console.log(video.played);
+            if(video.currentTime===video.duration){
+                $('.controls').removeClass('pause').addClass('play');
+                video.load('src/Maroon%205%20-%20Sugar.mp4');
+            }
+        }
+    });
+</script>
+</html>
