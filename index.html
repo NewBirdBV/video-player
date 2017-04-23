@@ -69,7 +69,6 @@
             }
         });
         video.ontimeupdate=function(){
-            console.log(video.played);
             if(video.currentTime===video.duration){
                 $('.controls').removeClass('pause').addClass('play');
                 video.load('src/Maroon%205%20-%20Sugar.mp4');
